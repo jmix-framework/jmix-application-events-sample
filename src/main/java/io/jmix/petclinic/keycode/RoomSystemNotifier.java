@@ -22,8 +22,9 @@ public class RoomSystemNotifier {
     @TransactionalEventListener
     public void notifyRoomSystem(EntityChangedEvent<Visit> event) {
         if (event.getType().equals(EntityChangedEvent.Type.CREATED)) {
-            Visit visit = loadVisit(event.getEntityId());
-            tryToNotifyRoomSystemAboutVisit(visit);
+            roomSystemGateway.informAboutVisit(
+                    loadVisit(event.getEntityId())
+            );
         }
     }
 
@@ -32,10 +33,6 @@ public class RoomSystemNotifier {
                 .load(visitId)
                 .joinTransaction(false)
                 .one();
-    }
-
-    private void tryToNotifyRoomSystemAboutVisit(Visit visit) {
-        roomSystemGateway.informAboutVisit(visit);
     }
 }
 // end::room-system-notifier[]

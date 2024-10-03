@@ -18,13 +18,9 @@ import io.jmix.flowui.view.*;
 import io.jmix.petclinic.entity.visit.Visit;
 import io.jmix.petclinic.online.OnlineDemoDataCreator;
 import io.jmix.petclinic.view.visit.MyVisitsView;
-import io.jmix.petclinic.visit.TreatmentCompletedEvent;
 import io.jmix.petclinic.visit.TreatmentStartedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
-
-
-
 
 // tag::treatment-started-event-consumer[]
 @Route("")

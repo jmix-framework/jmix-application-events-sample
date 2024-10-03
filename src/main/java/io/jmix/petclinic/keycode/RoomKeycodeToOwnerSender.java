@@ -28,10 +28,10 @@ public class RoomKeycodeToOwnerSender {
         this.mobilePhoneNotificationGateway = mobilePhoneNotificationGateway;
     }
 
-    @TransactionalEventListener
-    public void sendRoomKeycode(EntityChangedEvent<Visit> event) {
+    @TransactionalEventListener // <1>
+    public void sendRoomKeycode(EntityChangedEvent<Visit> event) { // <2>
         if (event.getType().equals(EntityChangedEvent.Type.CREATED)) {
-            Visit visit = loadVisit(event.getEntityId());
+            Visit visit = loadVisit(event.getEntityId());  // <3>
             tryToSendRoomKeycodeToPetsOwner(visit);
         }
     }

@@ -30,8 +30,8 @@ public class InvoicingProcessInitializer {
     }
 
     @EventListener
-    public void onVisitCompleted(TreatmentCompletedEvent event) {
-        log.info("Payment process initialized: {}", event.getVisit());
+    public void onTreatmentCompleted(TreatmentCompletedEvent event) {
+        log.info("Invoicing process initialized: {}", event.getVisit());
 
         SaveContext saveContext = new SaveContext();
         createInvoiceFor(event.getVisit(), saveContext);

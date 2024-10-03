@@ -3,6 +3,7 @@ package io.jmix.petclinic.view.visit;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
 import io.jmix.flowui.Notifications;
+import io.jmix.flowui.UiEventPublisher;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.kit.action.ActionPerformedEvent;
 import io.jmix.flowui.model.DataContext;
@@ -10,7 +11,10 @@ import io.jmix.flowui.view.*;
 import io.jmix.petclinic.entity.visit.Visit;
 import io.jmix.petclinic.entity.visit.VisitTreatmentStatus;
 import io.jmix.petclinic.view.main.MainView;
+import io.jmix.petclinic.visit.TreatmentStartedEvent;
+import io.jmix.petclinic.visit.VisitStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 
 @Route(value = "my-visits", layout = MainView.class)
 @ViewController("petclinic_MyVisits")
@@ -25,8 +29,12 @@ public class MyVisitsView extends StandardListView<Visit> {
     private Notifications notifications;
     @ViewComponent
     private MessageBundle messageBundle;
-    @ViewComponent
-    private DataContext dataContext;
+    @Autowired
+    private VisitStatusService visitStatusService;
+
+    // tag::treatment-started-event-producer[]
+    @Autowired
+    private UiEventPublisher uiEventPublisher;
 
     @Subscribe("visitsDataGrid.startTreatment")
     public void onStartTreatment(final ActionPerformedEvent event) {
@@ -41,10 +49,18 @@ public class MyVisitsView extends StandardListView<Visit> {
             return;
         }
 
-        updateTreatmentTo(visit, VisitTreatmentStatus.IN_PROGRESS);
-        notifications.create(messageBundle.formatMessage("treatmentStarted", visit.getPetName()))
+        visitStatusService.startVisit(visit);
+
+        uiEventPublisher.publishEventForCurrentUI(new TreatmentStartedEvent(this, visit));
+    }
+    // end::treatment-started-event-producer[]
+
+    @EventListener
+    public void onTreatmentStarted(TreatmentStartedEvent event) {
+        getViewData().loadAll();
+        notifications.create(messageBundle.formatMessage("treatmentStarted", event.getVisit().getPetName()))
                 .withType(Notifications.Type.SUCCESS)
-                .withPosition(Notification.Position.TOP_END)
+                .withPosition(Notification.Position.BOTTOM_END)
                 .show();
     }
 
@@ -61,16 +77,11 @@ public class MyVisitsView extends StandardListView<Visit> {
             return;
         }
 
-        updateTreatmentTo(visit, VisitTreatmentStatus.DONE);
+        visitStatusService.finishTreatment(visit);
+        getViewData().loadAll();
         notifications.create(messageBundle.formatMessage("treatmentFinished", visit.getPetName()))
                 .withType(Notifications.Type.SUCCESS)
-                .withPosition(Notification.Position.TOP_END)
+                .withPosition(Notification.Position.BOTTOM_END)
                 .show();
     }
-
-    private void updateTreatmentTo(Visit visit, VisitTreatmentStatus targetStatus) {
-        visit.setTreatmentStatus(targetStatus);
-        dataContext.save();
-    }
-
 }

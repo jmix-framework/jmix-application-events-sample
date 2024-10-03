@@ -81,3 +81,35 @@ a.event-blue .fc-event-main {
 .jmix-main-view-section a:-webkit-any-link:focus-visible {
     outline-color: var(--lumo-primary-color-50pct);
 }
+
+
+
+.active-treatments {
+    margin: 10px;
+    transform: scale(1);
+    background: rgba(51, 217, 178, 1);
+    box-shadow: 0 0 0 0 rgba(51, 217, 178, 1);
+    cursor: pointer;
+}
+
+.active-treatments-pulse {
+    animation: pulse-green 2s;
+    animation-iteration-count: 3;
+}
+
+@keyframes pulse-green {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(51, 217, 178, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(51, 217, 178, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(51, 217, 178, 0);
+    }
+}

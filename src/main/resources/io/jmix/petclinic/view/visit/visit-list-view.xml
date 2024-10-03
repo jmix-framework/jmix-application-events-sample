@@ -9,6 +9,7 @@
                     class="io.jmix.petclinic.entity.visit.Visit">
             <fetchPlan extends="_base">
                 <property name="pet" fetchPlan="_base"/>
+                <property name="room" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="visitsDl">
                 <query>

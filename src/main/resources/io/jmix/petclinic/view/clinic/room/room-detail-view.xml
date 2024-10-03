@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://roomDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="roomDc"
+                  class="io.jmix.petclinic.entity.room.Room">
+            <fetchPlan extends="_base"/>
+            <loader id="roomDl"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="roomDc">
+            <textField id="nameField" property="name"/>
+            <textField id="roomNumberField" property="roomNumber"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseButton" action="saveAction"/>
+            <button id="closeButton" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

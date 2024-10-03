@@ -1,9 +1,12 @@
 package io.jmix.petclinic.security;
 
 import io.jmix.petclinic.entity.User;
+import io.jmix.petclinic.entity.invoice.Invoice;
+import io.jmix.petclinic.entity.invoice.InvoiceItem;
 import io.jmix.petclinic.entity.owner.Owner;
 import io.jmix.petclinic.entity.pet.Pet;
 import io.jmix.petclinic.entity.pet.PetType;
+import io.jmix.petclinic.entity.room.Room;
 import io.jmix.petclinic.entity.veterinarian.Specialty;
 import io.jmix.petclinic.entity.veterinarian.Veterinarian;
 import io.jmix.petclinic.entity.visit.Visit;
@@ -48,9 +51,21 @@ public interface NurseRole {
     @EntityPolicy(entityClass = PetType.class, actions = EntityPolicyAction.READ)
     void petType();
 
-    @ViewPolicy(viewIds = {"petclinic_MyVisits", "petclinic_Pet.list", "petclinic_Owner.list", "petclinic_Visit.list", "petclinic_Specialty.list", "petclinic_Veterinarian.list", "petclinic_PetType.list", "petclinic_Owner.detail", "petclinic_Pet.detail", "petclinic_PetType.detail", "petclinic_PetType.lookup", "petclinic_Specialty.detail", "petclinic_Veterinarian.detail", "petclinic_Visit.detail"})
+    @ViewPolicy(viewIds = {"petclinic_MyVisits", "petclinic_Pet.list", "petclinic_Owner.list", "petclinic_Visit.list", "petclinic_Specialty.list", "petclinic_Veterinarian.list", "petclinic_PetType.list", "petclinic_Owner.detail", "petclinic_Pet.detail", "petclinic_PetType.detail", "petclinic_PetType.lookup", "petclinic_Specialty.detail", "petclinic_Veterinarian.detail", "petclinic_Visit.detail", "petclinic_Room.list", "petclinic_Invoice.detail", "petclinic_Invoice.list"})
     void views();
 
-    @MenuPolicy(menuIds = {"petclinic_MyVisits", "petclinic_Pet.list", "petclinic_Owner.list", "petclinic_Visit.list", "petclinic_Specialty.list", "petclinic_Veterinarian.list", "petclinic_PetType.list"})
+    @MenuPolicy(menuIds = {"petclinic_MyVisits", "petclinic_Pet.list", "petclinic_Owner.list", "petclinic_Visit.list", "petclinic_Specialty.list", "petclinic_Veterinarian.list", "petclinic_PetType.list", "petclinic_Room.list", "petclinic_Invoice.list"})
     void screens();
+
+    @EntityAttributePolicy(entityClass = Room.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @EntityPolicy(entityClass = Room.class, actions = EntityPolicyAction.READ)
+    void room();
+
+    @EntityAttributePolicy(entityClass = InvoiceItem.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @EntityPolicy(entityClass = InvoiceItem.class, actions = {EntityPolicyAction.CREATE, EntityPolicyAction.READ})
+    void invoiceItem();
+
+    @EntityAttributePolicy(entityClass = Invoice.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @EntityPolicy(entityClass = Invoice.class, actions = {EntityPolicyAction.CREATE, EntityPolicyAction.READ})
+    void invoice();
 }

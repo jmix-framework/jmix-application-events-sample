@@ -14,7 +14,10 @@
                               classNames="jmix-main-view-drawer-toggle"
                               themeNames="contrast"
                               ariaLabel="msg://drawerToggle.ariaLabel"/>
-                <h1 id="viewTitle" classNames="jmix-main-view-title"/>
+                <h1 id="viewTitle" classNames="jmix-main-view-title" width="100%"/>
+                <hbox width="100%" spacing="true" padding="true" justifyContent="END">
+                    <span themeNames="badge pill success" classNames="active-treatments" id="activeTreatments" />
+                </hbox>
             </header>
         </navigationBar>
         <drawerLayout>

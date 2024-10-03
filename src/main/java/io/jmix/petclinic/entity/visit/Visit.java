@@ -9,6 +9,7 @@ import io.jmix.core.metamodel.annotation.JmixEntity;
 import io.jmix.core.metamodel.annotation.JmixProperty;
 import io.jmix.petclinic.entity.NamedEntity;
 import io.jmix.petclinic.entity.User;
+import io.jmix.petclinic.entity.room.Room;
 import io.jmix.petclinic.entity.pet.Pet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -28,7 +29,8 @@ import static io.jmix.petclinic.entity.visit.VisitTreatmentStatus.IN_PROGRESS;
 @JmixEntity
 @Table(name = "PETCLINIC_VISIT", indexes = {
         @Index(name = "IDX_PETCLINIC_VISIT_ASSIGNED_NURSE", columnList = "ASSIGNED_NURSE_ID"),
-        @Index(name = "IDX_PETCLINIC_VISIT_PET", columnList = "PET_ID")
+        @Index(name = "IDX_PETCLINIC_VISIT_PET", columnList = "PET_ID"),
+        @Index(name = "IDX_PETCLINIC_VISIT_ROOM", columnList = "ROOM_ID")
 })
 @Entity(name = "petclinic_Visit")
 public class Visit {
@@ -36,6 +38,13 @@ public class Visit {
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
+
+    @JoinColumn(name = "ROOM_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Room room;
+
+    @Column(name = "ROOM_KEYCODE")
+    private String roomKeycode;
 
     @JoinColumn(name = "PET_ID", nullable = false)
     @NotNull
@@ -90,6 +99,22 @@ public class Visit {
     @DeletedDate
     @Column(name = "DELETED_DATE")
     private OffsetDateTime deletedDate;
+
+    public String getRoomKeycode() {
+        return roomKeycode;
+    }
+
+    public void setRoomKeycode(String roomKeycode) {
+        this.roomKeycode = roomKeycode;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
 
     @DependsOnProperties({"type"})
     @JmixProperty

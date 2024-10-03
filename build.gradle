@@ -49,6 +49,8 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
+    implementation "com.twilio.sdk:twilio:10.5.2"
+
     runtimeOnly 'org.hsqldb:hsqldb'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {

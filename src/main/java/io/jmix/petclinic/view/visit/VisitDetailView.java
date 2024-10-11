@@ -1,20 +1,15 @@
 package io.jmix.petclinic.view.visit;
 
+import com.vaadin.flow.router.Route;
 import io.jmix.flowui.component.combobox.EntityComboBox;
-import io.jmix.flowui.component.textfield.TypedTextField;
-import io.jmix.flowui.component.valuepicker.EntityPicker;
+import io.jmix.flowui.view.*;
 import io.jmix.petclinic.EmployeeRepository;
 import io.jmix.petclinic.entity.User;
 import io.jmix.petclinic.entity.visit.Visit;
-
 import io.jmix.petclinic.view.main.MainView;
-
-import com.vaadin.flow.router.Route;
-import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Random;
-
 
 
 // tag::generate-room-keycode[]

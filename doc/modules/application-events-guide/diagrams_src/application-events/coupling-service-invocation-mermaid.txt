@@ -1,0 +1,9 @@
+%% Service Invocation Diagram - Tight Coupling
+sequenceDiagram
+    participant Caller
+    participant Service1
+    participant Service2
+    participant Service3
+    Caller ->> Service1: callService1()
+    Caller ->> Service2: callService2()
+    Caller ->> Service3: callService3()

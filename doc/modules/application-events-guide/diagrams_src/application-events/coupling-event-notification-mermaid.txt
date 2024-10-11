@@ -1,0 +1,21 @@
+%% Event-Based Communication - Loose Coupling
+classDiagram
+    class Caller {
+        +emitEvent()
+    }
+    class Event {
+        +EventData
+    }
+    class Listener1 {
+        +onEvent()
+    }
+    class Listener2 {
+        +onEvent()
+    }
+    class Listener3 {
+        +onEvent()
+    }
+    Caller --> Event : emits
+    Listener1 --> Event : listens to
+    Listener2 --> Event : listens to
+    Listener3 --> Event : listens to

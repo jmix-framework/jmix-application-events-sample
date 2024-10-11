@@ -43,7 +43,7 @@ video::zTYx_KSeMzY[youtube,width=1280,height=600]
 [[benefits-of-event-based-business-logic]]
 == Benefits of Event-Based Business Logic
 
-The most common approach for communication in application logic is direct method invocation, where components interact via Java objects, Spring beans, or services. Direct method invocation is primarily used in the first guide on business logic: xref:guides:creating-business-logic-in-jmix.adoc[]. While this pattern is often effective, it can lead to tight coupling between components, making the system harder to maintain and extend as it grows.
+The most common approach for communication in application logic is direct method invocation, where components interact via Java objects, Spring beans, or services. Direct method invocation is primarily used in the first guide on business logic: xref:business-logic-guide:index.adoc[]. While this pattern is often effective, it can lead to tight coupling between components, making the system harder to maintain and extend as it grows.
 
 Event-based business logic offers an alternative communication pattern, where components communicate indirectly by emitting and handling events. This approach excels in scenarios where low coupling between participants is desired. While not suitable for every communication need, event-driven logic works particularly well in the following cases:
 

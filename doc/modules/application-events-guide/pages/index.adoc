@@ -110,7 +110,7 @@ TIP: There are two common annotations for registering event listeners in Jmix: `
 .RoomKeycodeToOwnerSender.java
 [source,java]
 ----
-include::example$/{sample-project}/main/java/io/jmix/petclinic/keycode/RoomKeycodeToOwnerSender.java[tags=room-keycode-to-owner-sender]
+include::example$/src/main/java/io/jmix/petclinic/keycode/RoomKeycodeToOwnerSender.java[tags=room-keycode-to-owner-sender]
 ----
 <1> Registers `sendRoomKeycode` as an event listener
 <2> Limits `EntityChangedEvent` to events that affect `Visit` entities
@@ -125,7 +125,7 @@ The following event listener handles the responsibility of notifying the room sy
 .RoomSystemNotifier.java
 [source,java]
 ----
-include::example$/{sample-project}/main/java/io/jmix/petclinic/keycode/RoomSystemNotifier.java[tags=room-system-notifier]
+include::example$/src/main/java/io/jmix/petclinic/keycode/RoomSystemNotifier.java[tags=room-system-notifier]
 ----
 
 Instead of creating a broad listener, like `PetCreatedListener` that handles multiple tasks after a pet is created, it is better to focus on a single responsibility as it is possible to have multiple listeners that are executed when an event is sent. For example, `RoomKeycodeToOwnerSender` specifically describes the listener's role of sending the room keycode to the pet's owner.
@@ -144,7 +144,7 @@ The first step in creating a custom application event is to define an event clas
 .TreatmentCompletedEvent.java
 [source,java]
 ----
-include::example$/{sample-project}/main/java/io/jmix/petclinic/visit/TreatmentCompletedEvent.java[]
+include::example$/src/main/java/io/jmix/petclinic/visit/TreatmentCompletedEvent.java[]
 ----
 
 [[publishing-custom-application-events]]
@@ -157,7 +157,7 @@ In the `VisitStatusService`, the `finishTreatment()` method marks a visit as com
 .VisitStatusService.java
 [source,java]
 ----
-include::example$/{sample-project}/main/java/io/jmix/petclinic/visit/VisitStatusService.java[tags=finish-treatment]
+include::example$/src/main/java/io/jmix/petclinic/visit/VisitStatusService.java[tags=finish-treatment]
 ----
 
 The event is published with `applicationEventPublisher.publishEvent(new TreatmentCompletedEvent(this, visit));`. Other components can listen for this event without the need for the `VisitStatusService` to be aware of those components.
@@ -169,7 +169,7 @@ The `InvoicingProcessInitializer` listens for the `TreatmentCompletedEvent` and 
 .InvoicingProcessInitializer.java
 [source,java]
 ----
-include::example$/{sample-project}/main/java/io/jmix/petclinic/invoice/InvoicingProcessInitializer.java[tags=create-visit-invoice]
+include::example$/src/main/java/io/jmix/petclinic/invoice/InvoicingProcessInitializer.java[tags=create-visit-invoice]
 ----
 
 [[jmix-ui-events]]
@@ -189,7 +189,7 @@ For the petclinic, the Visit Detail View controller leverages the `InitEntityEve
 .VisitDetailView.java
 [source,java]
 ----
-include::example$/{sample-project}/main/java/io/jmix/petclinic/view/visit/VisitDetailView.java[tags=generate-room-keycode]
+include::example$/src/main/java/io/jmix/petclinic/view/visit/VisitDetailView.java[tags=generate-room-keycode]
 ----
 
 [[custom-ui-events]]
@@ -206,7 +206,7 @@ Here’s an example of a custom `TreatmentStartedEvent` being published and hand
 .TreatmentStartedEvent.java
 [source,java]
 ----
-include::example$/{sample-project}/main/java/io/jmix/petclinic/visit/TreatmentStartedEvent.java[tags=treatment-started-event-definition]
+include::example$/src/main/java/io/jmix/petclinic/visit/TreatmentStartedEvent.java[tags=treatment-started-event-definition]
 ----
 
 Then, in the `MyVisitsView`, we publish the event using the `UiEventPublisher` when the treatment starts:
@@ -214,7 +214,7 @@ Then, in the `MyVisitsView`, we publish the event using the `UiEventPublisher` w
 .MyVisitsView.java
 [source,java]
 ----
-include::example$/{sample-project}/main/java/io/jmix/petclinic/view/visit/MyVisitsView.java[tags=treatment-started-event-producer]
+include::example$/src/main/java/io/jmix/petclinic/view/visit/MyVisitsView.java[tags=treatment-started-event-producer]
 ----
 
 Finally, in the `MainView`, we listen for the `TreatmentStartedEvent` and refresh the badge showing the active treatments:
@@ -222,7 +222,7 @@ Finally, in the `MainView`, we listen for the `TreatmentStartedEvent` and refres
 .MainView.java
 [source,java]
 ----
-include::example$/{sample-project}/main/java/io/jmix/petclinic/view/main/MainView.java[tags=treatment-started-event-consumer]
+include::example$/src/main/java/io/jmix/petclinic/view/main/MainView.java[tags=treatment-started-event-consumer]
 ----
 
 When a treatment is started in the `MyVisitsView`, the badge in the `MainView` is updated by counting the number of active treatments assigned to the current user. This mechanism allows to notify the main view from the currently opened view.

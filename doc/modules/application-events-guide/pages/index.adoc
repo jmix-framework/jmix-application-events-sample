@@ -35,10 +35,10 @@ The application includes the following event-driven features:
 
 These features demonstrate how application events can be used to decouple different parts of the application logic, enabling both UI-driven actions and background processes to work together efficiently.
 
-[[final-application]]
-=== Final Application
-
-video::zTYx_KSeMzY[youtube,width=1280,height=600]
+// [[final-application]]
+// === Final Application
+//
+// video::zTYx_KSeMzY[youtube,width=1280,height=600]
 
 [[benefits-of-event-based-business-logic]]
 == Benefits of Event-Based Business Logic

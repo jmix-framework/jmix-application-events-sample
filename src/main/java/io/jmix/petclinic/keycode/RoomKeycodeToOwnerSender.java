@@ -65,8 +65,8 @@ public class RoomKeycodeToOwnerSender {
                 this.getClass(),
                 "roomKeycodeNotification",
                 visit.getPet().getName(),
-                visit.getRoom().getRoomNumber(),
-                visit.getRoom().getName(),
+                visit.getRoom() != null ? visit.getRoom().getRoomNumber() : "",
+                visit.getRoom() != null ? visit.getRoom().getName() : "",
                 visit.getRoomKeycode()
         );
     }

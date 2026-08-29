@@ -191,7 +191,7 @@ On the UI layer, there are two main types of events: framework-provided UI event
 
 Jmix's UI framework relies on declarative event subscriptions using annotations. You can register event listeners in your controller with the `@Subscribe` annotation.
 
-There are various events you can subscribe to that handle the lifecycle of a controller, such as `InitEvent`, `BeforeCloseEvent`, and `PreCommitEvent`. The data components of the controllers also offer events like `ItemChangeEvent` and `CollectionChangeEvent`. Additionally, UI components themselves trigger events for changes in their state, such as `EnterPressEvent` and `TextChangeEvent`.
+There are various events you can subscribe to that handle the lifecycle of a controller, such as `InitEvent`, `BeforeCloseEvent`, and `BeforeSaveEvent`. The data components of the controllers also offer events like `ItemChangeEvent` and `CollectionChangeEvent`. Additionally, UI components themselves trigger events for changes in their state, such as `EnterPressEvent` and `TypedValueChangeEvent`.
 
 For the petclinic, the Visit Detail View controller leverages the `InitEntityEvent` for generating a Room keycode when a new entity is going to be created:
 
